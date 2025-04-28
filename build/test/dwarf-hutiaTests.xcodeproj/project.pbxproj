@@ -1,0 +1,695 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		1416D06C354C295467398053 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 99BE21C9A65B468A90C6B437 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				E4E12CC213714DB687CEAD0A /* Generate CMakeFiles/ZERO_CHECK */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		27E804A93BB797771B8CEE6A /* package */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = CA25C9E8A35C47738D520EA9 /* Build configuration list for PBXAggregateTarget "package" */;
+			buildPhases = (
+				571234464C2A5D0D43F1AB42 /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				EF003FABB09E4329B476672B /* PBXTargetDependency */,
+			);
+			name = package;
+			productName = package;
+		};
+		5558D7735FA52ADF533A4269 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 01A2D8FE1B1146B69A847E3D /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				9D02AAB6D6ED73EA3B251028 /* Generate CMakeFiles/ALL_BUILD */,
+			);
+			dependencies = (
+				44A3692F342848A49A75C91B /* PBXTargetDependency */,
+				D72B74240BA14A3497FDA460 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		A6DFD059AFD35A6F338E596B /* RUN_TESTS */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = B2059CFC63484308B1A055AE /* Build configuration list for PBXAggregateTarget "RUN_TESTS" */;
+			buildPhases = (
+				003C8D08B0008F35F218E126 /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+			);
+			name = RUN_TESTS;
+			productName = RUN_TESTS;
+		};
+		AEB2DA9158FE96393617E0F9 /* install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8AAFF7568E2843739720AE80 /* Build configuration list for PBXAggregateTarget "install" */;
+			buildPhases = (
+				93426DA6A4AC2C2AC9CE883C /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				B70DF7E35DA6461CBA3EC897 /* PBXTargetDependency */,
+			);
+			name = install;
+			productName = install;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		2A93F499E59142C2A99E21CF /* /Users/efimdenisov/Documents/dwarf-hutia/test/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 8936445B331C4CE797C624A3 /* /Users/efimdenisov/Documents/dwarf-hutia/test/CMakeLists.txt */; };
+		654B963E2592414ABB1D3D4B /* /Users/efimdenisov/Documents/dwarf-hutia/test/source/dwarf-hutia_test.cpp */ = {isa = PBXBuildFile; fileRef = AEEF02DE080641B18F2CB63F /* /Users/efimdenisov/Documents/dwarf-hutia/test/source/dwarf-hutia_test.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		CD467498FF6146AA871DFB06 /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		08A7D4396A2C4E238059260E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2803AD0B318D438390372A90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5558D7735FA52ADF533A4269;
+			remoteInfo = ALL_BUILD;
+		};
+		554E6015DD404C6DB9AEF3E6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2803AD0B318D438390372A90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5558D7735FA52ADF533A4269;
+			remoteInfo = ALL_BUILD;
+		};
+		5965F9D3D5144B129E224836 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2803AD0B318D438390372A90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF8FBFC46C7B3FE643CF350E;
+			remoteInfo = "dwarf-hutia_test";
+		};
+		F902496E13B54C72AA115FA4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2803AD0B318D438390372A90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1416D06C354C295467398053;
+			remoteInfo = ZERO_CHECK;
+		};
+		FBB8003BDEED4CC49665529C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2803AD0B318D438390372A90 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1416D06C354C295467398053;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8936445B331C4CE797C624A3 /* /Users/efimdenisov/Documents/dwarf-hutia/test/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		AEEF02DE080641B18F2CB63F /* /Users/efimdenisov/Documents/dwarf-hutia/test/source/dwarf-hutia_test.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = "dwarf-hutia_test.cpp"; path = "source/dwarf-hutia_test.cpp"; sourceTree = SOURCE_ROOT; };
+		BA282242FEC241BFB74FDDE2 /* /Users/efimdenisov/Documents/dwarf-hutia/test/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		E783B39E3174427890242024 /* dwarf-hutia_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = "dwarf-hutia_test"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D0033A3ED445478A8EA6810F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3C1857E4360944ABB916DFA5 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				AEEF02DE080641B18F2CB63F /* /Users/efimdenisov/Documents/dwarf-hutia/test/source/dwarf-hutia_test.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		466EA92C34684187A589AF6D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		4D0DBD70753149D9ABFDD155 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		619DA1EC9A814A1C8E8E4927 /* dwarf-hutia_test */ = {
+			isa = PBXGroup;
+			children = (
+				3C1857E4360944ABB916DFA5 /* Source Files */,
+				8936445B331C4CE797C624A3 /* /Users/efimdenisov/Documents/dwarf-hutia/test/CMakeLists.txt */,
+			);
+			name = "dwarf-hutia_test";
+			sourceTree = "<group>";
+		};
+		69F2B805FF7040D8A2A31E2E /* TestTargets */ = {
+			isa = PBXGroup;
+			children = (
+				619DA1EC9A814A1C8E8E4927 /* dwarf-hutia_test */,
+			);
+			name = TestTargets;
+			sourceTree = "<group>";
+		};
+		70882E1D76EE47BF9FFB58F0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E783B39E3174427890242024 /* dwarf-hutia_test */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		82FD9A85E9C74D75A658A89B /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				FE149C6236B0464FAEB152D3 /* CMake Rules */,
+				BA282242FEC241BFB74FDDE2 /* /Users/efimdenisov/Documents/dwarf-hutia/test/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		9AA68F3D11E5431196111904 = {
+			isa = PBXGroup;
+			children = (
+				69F2B805FF7040D8A2A31E2E /* TestTargets */,
+				82FD9A85E9C74D75A658A89B /* ALL_BUILD */,
+				70882E1D76EE47BF9FFB58F0 /* Products */,
+				4D0DBD70753149D9ABFDD155 /* Frameworks */,
+				466EA92C34684187A589AF6D /* Resources */,
+			);
+			sourceTree = "<group>";
+		};
+		FE149C6236B0464FAEB152D3 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FF8FBFC46C7B3FE643CF350E /* dwarf-hutia_test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 011FBE4608B4425A9A74FAB4 /* Build configuration list for PBXNativeTarget "dwarf-hutia_test" */;
+			buildPhases = (
+				D1DBC7C2CC9D4B0C888B1C7C /* Sources */,
+				D0033A3ED445478A8EA6810F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				10CAADC13EA54385B534E2E8 /* PBXTargetDependency */,
+			);
+			name = "dwarf-hutia_test";
+			productName = "dwarf-hutia_test";
+			productReference = E783B39E3174427890242024 /* dwarf-hutia_test */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2803AD0B318D438390372A90 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1540;
+			};
+			buildConfigurationList = F263725C08C64DFC95E76B2E /* Build configuration list for PBXProject "dwarf-hutiaTests" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				CD467498FF6146AA871DFB06 /* Release */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = 9AA68F3D11E5431196111904;
+			projectDirPath = "/Users/efimdenisov/Documents/dwarf-hutia/test";
+			projectRoot = "";
+			targets = (
+				5558D7735FA52ADF533A4269 /* ALL_BUILD */,
+				A6DFD059AFD35A6F338E596B /* RUN_TESTS */,
+				1416D06C354C295467398053 /* ZERO_CHECK */,
+				FF8FBFC46C7B3FE643CF350E /* dwarf-hutia_test */,
+				AEB2DA9158FE96393617E0F9 /* install */,
+				27E804A93BB797771B8CEE6A /* package */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		003C8D08B0008F35F218E126 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/efimdenisov/Documents/dwarf-hutia/build/test
+  /opt/homebrew/bin/ctest --force-new-ctest-process -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		3C0110FC8322DE7E50886E21 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		571234464C2A5D0D43F1AB42 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/efimdenisov/Documents/dwarf-hutia/build
+  /opt/homebrew/bin/cpack -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME --config ./CPackConfig.cmake
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		661D9C604B3B91332E7543CC = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		87AF4882E018677E2624B544 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		910A41151295C5F9742C25BD = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		93426DA6A4AC2C2AC9CE883C /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/efimdenisov/Documents/dwarf-hutia/build/test
+  /opt/homebrew/bin/cmake -DBUILD_TYPE=$CONFIGURATION$EFFECTIVE_PLATFORM_NAME -P cmake_install.cmake
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		9B50530E35CC49C82C2FACCF = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		9D02AAB6D6ED73EA3B251028 /* Generate CMakeFiles/ALL_BUILD */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ALL_BUILD";
+			outputPaths = (
+"/Users/efimdenisov/Documents/dwarf-hutia/build/test/CMakeFiles/ALL_BUILD"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/efimdenisov/Documents/dwarf-hutia/build/test
+  echo Build\\ all\\ projects
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		E4E12CC213714DB687CEAD0A /* Generate CMakeFiles/ZERO_CHECK */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ZERO_CHECK";
+			outputPaths = (
+"/Users/efimdenisov/Documents/dwarf-hutia/build/test/CMakeFiles/ZERO_CHECK"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Release\"; then :
+  cd /Users/efimdenisov/Documents/dwarf-hutia/build/test
+  make -f /Users/efimdenisov/Documents/dwarf-hutia/build/test/CMakeScripts/ReRunCMake.make
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D1DBC7C2CC9D4B0C888B1C7C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				654B963E2592414ABB1D3D4B /* /Users/efimdenisov/Documents/dwarf-hutia/test/source/dwarf-hutia_test.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		10CAADC13EA54385B534E2E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1416D06C354C295467398053 /* ZERO_CHECK */;
+			targetProxy = FBB8003BDEED4CC49665529C /* PBXContainerItemProxy */;
+		};
+		44A3692F342848A49A75C91B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1416D06C354C295467398053 /* ZERO_CHECK */;
+			targetProxy = F902496E13B54C72AA115FA4 /* PBXContainerItemProxy */;
+		};
+		B70DF7E35DA6461CBA3EC897 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5558D7735FA52ADF533A4269 /* ALL_BUILD */;
+			targetProxy = 08A7D4396A2C4E238059260E /* PBXContainerItemProxy */;
+		};
+		D72B74240BA14A3497FDA460 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF8FBFC46C7B3FE643CF350E /* dwarf-hutia_test */;
+			targetProxy = 5965F9D3D5144B129E224836 /* PBXContainerItemProxy */;
+		};
+		EF003FABB09E4329B476672B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5558D7735FA52ADF533A4269 /* ALL_BUILD */;
+			targetProxy = 554E6015DD404C6DB9AEF3E6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4BF5213AC3B5413DA2D1D5BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				MACOSX_DEPLOYMENT_TARGET = 14.3;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SYMROOT = "/Users/efimdenisov/Documents/dwarf-hutia/build/build";
+			};
+			name = Release;
+		};
+		72FC86170715480697FFD49B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		8682B470FD8D408C9599E090 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		9C2B5F09F7DB42A6B2FA69C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = RUN_TESTS;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		9D21625FE87F412FB056CF5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = package;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		A9809298657F4089BE03254F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = install;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		D45A4BE9C5BF45A681E7AB1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/efimdenisov/Documents/dwarf-hutia/build/test/Release";
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/efimdenisov/Documents/dwarf-hutia/source","$(inherited)");
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CPLUSPLUSFLAGS = "-fstack-protector-strong -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wcast-qual -Wformat=2 -Wundef -Werror=float-equal -Wshadow -Wcast-align -Wunused -Wnull-dereference -Wdouble-promotion -Wimplicit-fallthrough -Wextra-semi -Woverloaded-virtual -Wnon-virtual-dtor -Wold-style-cast     -DNDEBUG '-std=c++20' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names","/Users/efimdenisov/Documents/dwarf-hutia/build/build/dwarf-hutia_lib.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/$(OBJECT_FILE_DIR_normal:base)/arm64/lib.o","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "dwarf-hutia_test";
+				SECTORDER_FLAGS = "";
+				TARGET_TEMP_DIR = "/Users/efimdenisov/Documents/dwarf-hutia/build/build/dwarf-hutia_test.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		011FBE4608B4425A9A74FAB4 /* Build configuration list for PBXNativeTarget "dwarf-hutia_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D45A4BE9C5BF45A681E7AB1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01A2D8FE1B1146B69A847E3D /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72FC86170715480697FFD49B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8AAFF7568E2843739720AE80 /* Build configuration list for PBXAggregateTarget "install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9809298657F4089BE03254F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		99BE21C9A65B468A90C6B437 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8682B470FD8D408C9599E090 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2059CFC63484308B1A055AE /* Build configuration list for PBXAggregateTarget "RUN_TESTS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C2B5F09F7DB42A6B2FA69C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CA25C9E8A35C47738D520EA9 /* Build configuration list for PBXAggregateTarget "package" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D21625FE87F412FB056CF5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F263725C08C64DFC95E76B2E /* Build configuration list for PBXProject "dwarf-hutiaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4BF5213AC3B5413DA2D1D5BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2803AD0B318D438390372A90 /* Project object */;
+}
