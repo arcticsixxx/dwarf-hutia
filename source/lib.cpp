@@ -1,6 +1,4 @@
 #include "lib.hpp"
 
-library::library()
-    : name {"dwarf-hutia"}
-{
-}
+
+// library::library() : name{"dwarf-hutia"} {}

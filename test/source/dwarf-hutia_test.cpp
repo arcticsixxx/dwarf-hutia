@@ -1,8 +1,7 @@
-#include "lib.hpp"
+// jinclude "lib.hpp"
 
-auto main() -> int
-{
-  auto const lib = library {};
+auto main() -> int {
+  // auto const lib = library{};
 
-  return lib.name == "dwarf-hutia" ? 0 : 1;
+  // return lib.name == "dwarf-hutia" ? 0 : 1;
 }

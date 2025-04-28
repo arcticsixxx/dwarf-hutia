@@ -15,9 +15,43 @@ include(cmake/variables.cmake)
 
 # ---- Declare library ----
 
+set(ZLIB_ROOT "/opt/homebrew/opt/zlib")
+set(ZLIB_INCLUDE_DIR "${ZLIB_ROOT}/include")
+set(ZLIB_LIBRARY "${ZLIB_ROOT}/lib/libz.dylib")
+
+find_package(ZLIB REQUIRED)
+include_directories(${ZLIB_INCLUDE_DIRS})
+
+find_package(gRPC REQUIRED)
+find_package(Protobuf REQUIRED)
+find_package(Threads REQUIRED)
+
+
+# set(PROTO_FILE proto/example.proto)
+
+# Generate protobuf and gRPC files
+# protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_FILE})
+# grpc_generate_cpp(GRPC_SRCS GRPC_HDRS ${PROTO_FILE})
+include_directories(
+    ${PROTOBUF_INCLUDE_DIRS}
+    ${GRPC_INCLUDE_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}/source
+)
+
 add_library(
     dwarf-hutia_lib OBJECT
     source/lib.cpp
+    source/lib.hpp
+   source/example.grpc.pb.cc
+   source/example.pb.h
+   source/example.grpc.pb.h
+   source/example.pb.cc
+)
+
+target_link_libraries(dwarf-hutia_lib PRIVATE
+    gRPC::grpc++
+    gRPC::grpc++_reflection
+    protobuf::libprotobuf
 )
 
 target_include_directories(
@@ -29,6 +63,20 @@ target_include_directories(
 target_compile_features(dwarf-hutia_lib PUBLIC cxx_std_20)
 
 # ---- Declare executable ----
+
+add_executable(client
+    source/client.cpp
+   source/example.grpc.pb.cc
+   source/example.pb.h
+   source/example.grpc.pb.h
+   source/example.pb.cc
+)
+
+target_link_libraries(client
+    PRIVATE
+    gRPC::grpc++
+    protobuf::libprotobuf
+)
 
 add_executable(dwarf-hutia_exe source/main.cpp)
 add_executable(dwarf-hutia::exe ALIAS dwarf-hutia_exe)
