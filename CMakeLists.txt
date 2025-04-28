@@ -62,6 +62,23 @@ target_include_directories(
 
 target_compile_features(dwarf-hutia_lib PUBLIC cxx_std_20)
 
+add_library(
+    core_lib OBJECT
+    source/core/core.h
+    source/core/core.cpp
+)
+
+target_link_libraries(core_lib PRIVATE)
+
+target_include_directories(
+  core_lib ${warning_guard}
+  PUBLIC
+  "\$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source/core>"
+)
+
+target_compile_features(core_lib PUBLIC cxx_std_20)
+
+
 # ---- Declare executable ----
 
 add_executable(client
@@ -85,7 +102,7 @@ set_property(TARGET dwarf-hutia_exe PROPERTY OUTPUT_NAME dwarf-hutia)
 
 target_compile_features(dwarf-hutia_exe PRIVATE cxx_std_20)
 
-target_link_libraries(dwarf-hutia_exe PRIVATE dwarf-hutia_lib)
+target_link_libraries(dwarf-hutia_exe PRIVATE dwarf-hutia_lib core_lib)
 
 # ---- Install rules ----
 
