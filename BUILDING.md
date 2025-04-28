@@ -1,5 +1,11 @@
 # Building with CMake
 
+## Current build essentials 
+
+```sh
+brew install autoconf automake libtool pkg-config zlib grpc protobuf
+```
+
 ## Build
 
 This project doesn't require any special command-line flags to build to keep
