@@ -2,6 +2,8 @@
 
 This is the dwarf-hutia project.
 
+This is the clown(not clone) of redis in topology of main configuration.
+
 # Building and installing
 
 See the [BUILDING](BUILDING.md) document.
