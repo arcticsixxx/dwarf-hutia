@@ -4,6 +4,8 @@ add_library(
     core_lib OBJECT
     core.h
     core.cpp
+    cli.h
+    cli.cpp
 )
 
 target_link_libraries(core_lib PRIVATE)
