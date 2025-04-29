@@ -2,9 +2,6 @@
 
 #include <queue>
 
-#include <shared_mutex>
-#include <condition_variable>
-
 namespace core
 {
 
@@ -24,9 +21,9 @@ private:
 
 private:
     std::queue<std::string> queue_;
-    std::shared_mutex mutex_;
+    std::mutex mutex_;
 
-    std::condition_variable_any cv;
+    std::condition_variable cv;
 
     bool is_running;
 };

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <mutex>
+#include <shared_mutex>
 #include <optional>
 #include <unordered_map>
 
@@ -14,6 +14,6 @@ public:
 
 private:
     std::unordered_map<std::string, std::string> store_;
-    std::mutex mutex_;
+    std::shared_mutex mutex_;
 };
 }

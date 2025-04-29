@@ -13,14 +13,14 @@ CLI::CLI()
 {
     is_running = true;
 
-    std::thread cli{&CLI::parseInput};
+    std::thread cli{&CLI::parseInput, this};
     cli.detach();
 }
 
 CLI::~CLI()
 {
     {
-        std::shared_lock<std::shared_mutex> lock{mutex_};
+        std::unique_lock<std::mutex> lock{mutex_};
         is_running = false;
     }
 
@@ -31,7 +31,7 @@ CLI::~CLI()
 void CLI::addArg(const std::string& arg)
 {
     {
-        std::shared_lock<std::shared_mutex> lock{mutex_};
+        std::unique_lock<std::mutex> lock{mutex_};
         queue_.push(arg);
     }
 
@@ -42,7 +42,7 @@ void CLI::parseInput()
 {
     while (is_running)
     {
-        std::shared_lock<std::shared_mutex> lock{mutex_};
+        std::unique_lock<std::mutex> lock{mutex_};
         cv.wait(lock, [this] { return !queue_.empty() || !is_running; });
 
         while (!queue_.empty())

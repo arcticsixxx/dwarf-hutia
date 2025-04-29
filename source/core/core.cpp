@@ -6,13 +6,13 @@ namespace core
 {
 void KeyValueStore::Set(const std::string &key, const std::string &value)
 {
-    std::shared_lock<std::mutex> lock{mutex_};
+    std::shared_lock<std::shared_mutex> lock{mutex_};
     store_[key] = value;
 }
 
 std::optional<std::string> KeyValueStore::Get(const std::string &key)
 {
-    std::shared_lock<std::mutex> lock{mutex_};
+    std::shared_lock<std::shared_mutex> lock{mutex_};
 
     if (! store_.contains(key))
     {
@@ -24,7 +24,7 @@ std::optional<std::string> KeyValueStore::Get(const std::string &key)
 
 bool KeyValueStore::Delete(const std::string &key)
 {
-    std::shared_lock<std::mutex> lock{mutex_};
+    std::shared_lock<std::shared_mutex> lock{mutex_};
 
     if (! store_.contains(key) )
     {
