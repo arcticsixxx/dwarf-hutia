@@ -74,6 +74,7 @@ target_compile_features(dwarf-hutia_lib PUBLIC cxx_std_20)
 # ---- Declare executable ----
 
 add_subdirectory(source/core)
+add_subdirectory(source/dwarf_cli)
 
 add_executable(client
     source/client.cpp
