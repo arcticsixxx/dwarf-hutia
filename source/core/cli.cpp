@@ -13,14 +13,14 @@ CLI::CLI()
 {
     is_running = true;
 
-    std::thread cli{&CLI::parse_input};
+    std::thread cli{&CLI::parseInput};
     cli.detach();
 }
 
 CLI::~CLI()
 {
     {
-        std::lock_guard<std::mutex> lock{mutex_};
+        std::shared_lock<std::shared_mutex> lock{mutex_};
         is_running = false;
     }
 
@@ -31,18 +31,18 @@ CLI::~CLI()
 void CLI::addArg(const std::string& arg)
 {
     {
-        std::lock_guard<std::mutex> lock{mutex_};
+        std::shared_lock<std::shared_mutex> lock{mutex_};
         queue_.push(arg);
     }
 
     cv.notify_one();
 }
 
-void CLI::parse_input()
+void CLI::parseInput()
 {
     while (is_running)
     {
-        std::unique_lock<std::mutex> lock{mutex_};
+        std::shared_lock<std::shared_mutex> lock{mutex_};
         cv.wait(lock, [this] { return !queue_.empty() || !is_running; });
 
         while (!queue_.empty())
@@ -51,14 +51,14 @@ void CLI::parse_input()
             queue_.pop();
 
             lock.unlock();
-            parse_arg(arg);
+            parseArg(arg);
             lock.lock();
         }
     }
 }
 
 
-void CLI::parse_arg(const std::string& arg)
+void CLI::parseArg(const std::string& arg)
 {
     // /GET test /SET key val
     //          |

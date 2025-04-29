@@ -1,7 +1,9 @@
 #pragma once
 
-#include <mutex>
 #include <queue>
+
+#include <shared_mutex>
+#include <condition_variable>
 
 namespace core
 {
@@ -16,15 +18,15 @@ public:
     void addArg(const std::string& arg);
 
 private:
-    void parse_input();
+    void parseInput();
 
-    void parse_arg(const std::string& arg);
+    void parseArg(const std::string& arg);
 
 private:
     std::queue<std::string> queue_;
-    std::mutex mutex_;
+    std::shared_mutex mutex_;
 
-    std::condition_variable cv;
+    std::condition_variable_any cv;
 
     bool is_running;
 };
