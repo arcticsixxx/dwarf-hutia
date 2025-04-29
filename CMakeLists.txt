@@ -5,19 +5,21 @@ include(cmake/prelude.cmake)
 project(
     dwarf-hutia
     VERSION 0.1.0
-    DESCRIPTION "redis clone "
+    DESCRIPTION "redis clown"
     HOMEPAGE_URL "https://example.com/"
     LANGUAGES CXX
 )
 
 include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
+include(cmake/grpc-gen.cmake)
 
-# ---- Declare library ----
+# ---- GRPC ----
 
-set(ZLIB_ROOT "/opt/homebrew/opt/zlib")
-set(ZLIB_INCLUDE_DIR "${ZLIB_ROOT}/include")
-set(ZLIB_LIBRARY "${ZLIB_ROOT}/lib/libz.dylib")
+# idk it is not neccesary mb
+# set(ZLIB_ROOT "/opt/homebrew/opt/zlib")
+# set(ZLIB_INCLUDE_DIR "${ZLIB_ROOT}/include")
+# set(ZLIB_LIBRARY "${ZLIB_ROOT}/lib/libz.dylib")
 
 find_package(ZLIB REQUIRED)
 include_directories(${ZLIB_INCLUDE_DIRS})
@@ -26,32 +28,39 @@ find_package(gRPC REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(Threads REQUIRED)
 
+set(PROTO_FILES "proto/kvstore.proto")
 
-# set(PROTO_FILE proto/example.proto)
+grpc_gen_cpp(
+    PROTO_FILES ${PROTO_FILES}
+    PROTO_DIR "${CMAKE_CURRENT_SOURCE_DIR}/proto"
+    GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated"
+    TARGET_NAME "proto_gen"
+)
 
-# Generate protobuf and gRPC files
-# protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_FILE})
-# grpc_generate_cpp(GRPC_SRCS GRPC_HDRS ${PROTO_FILE})
+# ---- Declare library ----
+
 include_directories(
     ${PROTOBUF_INCLUDE_DIRS}
     ${GRPC_INCLUDE_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}/source
+    ${PROTO_GEN_DIR}
 )
 
 add_library(
     dwarf-hutia_lib OBJECT
     source/lib.cpp
     source/lib.hpp
-   source/example.grpc.pb.cc
-   source/example.pb.h
-   source/example.grpc.pb.h
-   source/example.pb.cc
+    ${GENERATED_PROTO_SRCS}
+    ${GENERATED_PROTO_HDRS}
 )
+
+add_dependencies(dwarf-hutia_lib proto_gen)
 
 target_link_libraries(dwarf-hutia_lib PRIVATE
     gRPC::grpc++
     gRPC::grpc++_reflection
     protobuf::libprotobuf
+    Threads::Threads
 )
 
 target_include_directories(
@@ -68,26 +77,31 @@ add_subdirectory(source/core)
 
 add_executable(client
     source/client.cpp
-   source/example.grpc.pb.cc
-   source/example.pb.h
-   source/example.grpc.pb.h
-   source/example.pb.cc
 )
 
-target_link_libraries(client
-    PRIVATE
+add_dependencies(client proto_gen)
+
+target_link_libraries(client PRIVATE
     gRPC::grpc++
     protobuf::libprotobuf
+    Threads::Threads
+    dwarf-hutia_lib
 )
 
-add_executable(dwarf-hutia_exe source/main.cpp)
+add_executable(dwarf-hutia_exe
+    source/main.cpp
+)
 add_executable(dwarf-hutia::exe ALIAS dwarf-hutia_exe)
 
 set_property(TARGET dwarf-hutia_exe PROPERTY OUTPUT_NAME dwarf-hutia)
 
 target_compile_features(dwarf-hutia_exe PRIVATE cxx_std_20)
 
-target_link_libraries(dwarf-hutia_exe PRIVATE dwarf-hutia_lib core_lib)
+target_link_libraries(dwarf-hutia_exe PRIVATE
+    dwarf-hutia_lib
+    Threads::Threads
+    core_lib
+    )
 
 # ---- Install rules ----
 

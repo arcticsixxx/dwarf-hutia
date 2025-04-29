@@ -6,26 +6,7 @@
 #include <memory>
 #include <string>
 
-#include "example.grpc.pb.h"
 #include <grpcpp/grpcpp.h>
-
-using example::ExampleService;
-using example::HelloRequest;
-using example::HelloResponse;
-using grpc::Server;
-using grpc::ServerBuilder;
-using grpc::ServerContext;
-using grpc::Status;
-
-class ExampleServiceImpl final : public ExampleService::Service {
-  Status SayHello(ServerContext *context, const HelloRequest *request,
-                  HelloResponse *reply) override {
-    std::string prefix("Hello, ");
-    reply->set_message(prefix + request->name());
-    std::cout << "Sending response: " << reply->message() << std::endl;
-    return Status::OK;
-  }
-};
 
 /**
  * @brief The core implementation of the executable
