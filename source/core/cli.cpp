@@ -6,12 +6,14 @@
 namespace core
 {
 
+using Commands = std::tuple<std::string, std::string>;
+
 std::set<std::string> keywords = { "/SET", "/GET", "/DELETE" };
 const auto space = ' ';
 
 CLI::CLI()
 {
-    is_running = true;
+    is_running_ = true;
 
     std::thread cli{&CLI::parseInput, this};
     cli.detach();
@@ -21,11 +23,10 @@ CLI::~CLI()
 {
     {
         std::unique_lock<std::mutex> lock{mutex_};
-        is_running = false;
+        is_running_ = false;
     }
 
-    cv.notify_one();
-
+    cv_.notify_one();
 }
 
 void CLI::addArg(const std::string& arg)
@@ -35,15 +36,15 @@ void CLI::addArg(const std::string& arg)
         queue_.push(arg);
     }
 
-    cv.notify_one();
+    cv_.notify_one();
 }
 
 void CLI::parseInput()
 {
-    while (is_running)
+    while (is_running_)
     {
         std::unique_lock<std::mutex> lock{mutex_};
-        cv.wait(lock, [this] { return !queue_.empty() || !is_running; });
+        cv_.wait(lock, [this] { return !queue_.empty() || !is_running_; });
 
         while (!queue_.empty())
         {
@@ -56,7 +57,6 @@ void CLI::parseInput()
         }
     }
 }
-
 
 void CLI::parseArg(const std::string& arg)
 {
@@ -74,9 +74,14 @@ void CLI::parseArg(const std::string& arg)
         tokens.push_back(arg.substr(start, end - start));
     }
 
+    parseCommands(tokens);
+}
+
+void CLI::parseCommands(const std::vector<std::string> &tokens)
+{
     std::string command;
     std::string commandArgs;
-    std::vector<std::tuple<std::string, std::string>> commands;
+    std::vector<Commands> commands;
 
     for (auto&& tok : tokens)
     {
