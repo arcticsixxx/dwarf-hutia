@@ -1,15 +1,11 @@
 #include "cli.h"
 
 #include <thread>
-#include <set>
 
 namespace core
 {
 
-using Commands = std::tuple<std::string, std::string>;
-
-std::set<std::string> keywords = { "/SET", "/GET", "/DELETE" };
-const auto space = ' ';
+constexpr const auto slashKey = '/';
 
 CLI::CLI()
 {
@@ -39,6 +35,14 @@ void CLI::addArg(const std::string& arg)
     cv_.notify_one();
 }
 
+void CLI::addHandler(const std::string &cmd, CmdHandler &&handler)
+{
+    auto newCmd = std::string{slashKey + cmd};
+
+    handlers_[newCmd] = std::move(handler);
+    keywords_.insert(newCmd);
+}
+
 void CLI::parseInput()
 {
     while (is_running_)
@@ -63,52 +67,80 @@ void CLI::parseArg(const std::string& arg)
     // /GET test /SET key val
     //          |
     //          V
-    // [("/GET", "something"), ("/SET", "key value")]
+    // [("/GET something"), ("/SET key value")]
 
-    std::vector<std::string> tokens;
-    size_t start, end = 0;
+    std::vector<std::string> cmds;
+    std::istringstream iss{arg};
 
-    while ((start = arg.find_first_not_of(space, end)) != std::string::npos)
+    std::string word;
+    std::string current;
+
+    while (iss >> word)
     {
-        end = arg.find(space, start);
-        tokens.push_back(arg.substr(start, end - start));
-    }
-
-    parseCommands(tokens);
-}
-
-void CLI::parseCommands(const std::vector<std::string> &tokens)
-{
-    std::string command;
-    std::string commandArgs;
-    std::vector<Commands> commands;
-
-    for (auto&& tok : tokens)
-    {
-        if (keywords.contains(tok))
+        if (!word.empty() && word[0] == slashKey)
         {
-            if (!command.empty())
+            if (!current.empty())
             {
-                commands.emplace_back(std::make_tuple(command, commandArgs));
+                cmds.push_back(current);
+                current.clear();
             }
-
-            command = tok;
-            commandArgs.clear();
+            current += word;
         }
         else
         {
-            if (!commandArgs.empty())
-            {
-                commandArgs += ' ';
-            }
-            commandArgs += tok;
+            current += " " + word;
         }
     }
-
-    if (!command.empty())
+    if (!current.empty())
     {
-        commands.emplace_back(std::make_tuple(command, commandArgs));
+        cmds.push_back(current);
     }
+
+    proccessCmds(cmds);
 }
 
+void CLI::proccessCmds(const std::vector<std::string> &cmds)
+{
+    if (cmds.empty())
+    {
+        return;
+    }
+
+    for (auto&& cmd : cmds)
+    {
+        bool commandMatched = false;
+
+        for (auto&& kw : keywords_)
+        {;
+            if (cmd.starts_with(kw))
+            {
+                commandMatched = true;
+                break;
+            }
+        }
+
+        if (!commandMatched) continue;
+
+        size_t pos = cmd.find(' ');
+        std::string c, args;
+
+        if (pos != std::string::npos)
+        {
+            c = cmd.substr(0, pos);
+            args = cmd.substr(pos + 1);
+        }
+        else
+        {
+            c = cmd;
+        }
+
+        auto it = handlers_.find(c);
+        if (it == handlers_.end())
+        {
+            continue;
+        }
+
+        it->second(args);
+    }
+}
 }
