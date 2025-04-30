@@ -1,34 +1,12 @@
-#include <iostream>
-#include <string>
+#include <core/network/keyvalueservice.h>
+#include <core/network/server.h>
+#include <grpcpp/grpcpp.h>
+#include <keyvaluestore.h>
 
-#include "core/cli.h"
-
-auto main() -> int {
-    core::CLI cli;
-
-    core::CmdHandler alwaysSuccess = [](const std::string& str) -> std::error_code {
-        std::cout << "Command: " << str << " processed successfully!" << std::endl;
-        return std::error_code{};
-    };
-
-    cli.addHandler("SET", std::move(alwaysSuccess));
-
-    core::CmdHandler checkNonEmptyString = [](const std::string& str) -> std::error_code {
-        if (str.empty()) {
-            std::cerr << "Error: Command string is empty!" << std::endl;
-            return std::make_error_code(std::errc::invalid_argument);
-        }
-        std::cout << "Command: " << str << " processed successfully!" << std::endl;
-        return std::error_code{};
-    };
-
-    cli.addHandler("GET", std::move(checkNonEmptyString));
-
-    std::string str;
-    while (std::getline(std::cin, str)) {
-        if (str == "/EXIT") break;
-        cli.addArg(str);
-    }
+auto main() -> int
+{
+    auto storage = std::make_shared<core::KeyValueStore>();
+    core::network::RunServer("0.0.0.0:50051", storage);
 
     return 0;
 }

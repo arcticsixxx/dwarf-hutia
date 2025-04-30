@@ -16,11 +16,6 @@ include(cmake/grpc-gen.cmake)
 
 # ---- GRPC ----
 
-# idk it is not neccesary mb
-# set(ZLIB_ROOT "/opt/homebrew/opt/zlib")
-# set(ZLIB_INCLUDE_DIR "${ZLIB_ROOT}/include")
-# set(ZLIB_LIBRARY "${ZLIB_ROOT}/lib/libz.dylib")
-
 find_package(ZLIB REQUIRED)
 include_directories(${ZLIB_INCLUDE_DIRS})
 
@@ -89,7 +84,8 @@ target_link_libraries(dwarf-hutia_exe PRIVATE
     dwarf-hutia_lib
     Threads::Threads
     core_lib
-    )
+    network_lib
+)
 
 # ---- Install rules ----
 
