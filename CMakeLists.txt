@@ -16,11 +16,6 @@ include(cmake/grpc-gen.cmake)
 
 # ---- GRPC ----
 
-# idk it is not neccesary mb
-# set(ZLIB_ROOT "/opt/homebrew/opt/zlib")
-# set(ZLIB_INCLUDE_DIR "${ZLIB_ROOT}/include")
-# set(ZLIB_LIBRARY "${ZLIB_ROOT}/lib/libz.dylib")
-
 find_package(ZLIB REQUIRED)
 include_directories(${ZLIB_INCLUDE_DIRS})
 
@@ -76,18 +71,13 @@ target_compile_features(dwarf-hutia_lib PUBLIC cxx_std_20)
 add_subdirectory(source/core)
 add_subdirectory(source/dwarf_cli)
 
-add_executable(client
-    source/client.cpp
-)
-
-add_dependencies(client proto_gen)
-
-target_link_libraries(client PRIVATE
-    gRPC::grpc++
-    protobuf::libprotobuf
-    Threads::Threads
-    dwarf-hutia_lib
-)
+# add_dependencies(client proto_gen)
+# target_link_libraries(client PRIVATE
+#     gRPC::grpc++
+#     protobuf::libprotobuf
+#     Threads::Threads
+#     dwarf-hutia_lib
+# )
 
 add_executable(dwarf-hutia_exe
     source/main.cpp
@@ -102,7 +92,8 @@ target_link_libraries(dwarf-hutia_exe PRIVATE
     dwarf-hutia_lib
     Threads::Threads
     core_lib
-    )
+    network_lib
+)
 
 # ---- Install rules ----
 

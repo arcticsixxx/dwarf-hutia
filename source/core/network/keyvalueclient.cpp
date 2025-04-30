@@ -4,6 +4,8 @@
 
 namespace core::network {
 
+// auto channel = grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials());
+// ChannelRegistry
 KeyValueClient::KeyValueClient(std::shared_ptr<grpc::Channel> channel)
     : stub_(kvstore::KeyValueService::NewStub(channel))
 {}

@@ -6,6 +6,7 @@ add_library(
     keyvalueclient.h
     keyvalueservice.h keyvalueservice.cpp
     server.h server.cpp
+
 )
 
 target_link_libraries(network_lib PRIVATE)
