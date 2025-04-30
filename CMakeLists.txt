@@ -33,10 +33,8 @@ grpc_gen_cpp(
 )
 
 # ---- Declare library ----
-
 include_directories(
     ${PROTOBUF_INCLUDE_DIRS}
-    ${GRPC_INCLUDE_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}/source
     ${PROTO_GEN_DIR}
 )
@@ -74,6 +72,10 @@ add_subdirectory(source/dwarf_cli)
 add_executable(dwarf-hutia_exe
     source/main.cpp
 )
+
+add_dependencies(core_lib proto_gen)
+add_dependencies(dwarf-hutia_exe proto_gen)
+
 add_executable(dwarf-hutia::exe ALIAS dwarf-hutia_exe)
 
 set_property(TARGET dwarf-hutia_exe PROPERTY OUTPUT_NAME dwarf-hutia)
