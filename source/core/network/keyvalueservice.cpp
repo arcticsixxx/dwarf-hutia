@@ -23,11 +23,12 @@ grpc::Status KeyValueService::Get([[maybe_unused]] grpc::ServerContext *context,
                                   kvstore::GetResponse *response)
 {
     auto value = storage_->Get(request->key());
-    response->set_found(value.has_value());
-    if (value) {
-        response->set_value(value.value());
+    // response->set_found(value.has_value());
+    if (!value) {
+        return { grpc::StatusCode::NOT_FOUND, "Value by recived key not found" };
     }
 
+    response->set_value(value.value());
     return grpc::Status::OK;
 }
 
