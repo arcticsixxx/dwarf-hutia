@@ -6,10 +6,41 @@ namespace dwarf_cli
 {
 
 Application::Application()
+    : client_{ grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()) }
 {
-    // std::string server_address("localhost:50051");
-    // auto channel = grpc::CreateChannel(server_address, grpc::InsecureChannelCredentials());
-    // auto stub = kvstore::KeyValueService::NewStub(channel);
+    cli_.addHandler("GET", [this](const std::string& arg) -> std::error_code
+    {
+        if (arg.empty()) {
+            std::cerr << "Error: Command string is empty!\n";
+            return std::make_error_code(std::errc::invalid_argument);
+        }
+
+        client_.Get(arg);
+        return {};
+    });
+
+    cli_.addHandler("SET", [this](const std::string& arg) -> std::error_code
+    {
+        if (arg.empty()) {
+            std::cerr << "Error: Command string is empty!\n";
+            return std::make_error_code(std::errc::invalid_argument);
+        }
+
+        std::string key, value;
+        std::istringstream iss{arg};
+
+        client_.Set(key, value);
+        return {};
+    });
 }
 
+void Application::run()
+{
+    std::string str;
+    while (std::getline(std::cin, str)) {
+        if (str == "/EXIT") break;
+        cli_.addArg(str);
+    }
 }
+
+} // namespace dwarf_cli
