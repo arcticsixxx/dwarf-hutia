@@ -69,6 +69,9 @@ target_compile_features(dwarf-hutia_lib PUBLIC cxx_std_20)
 add_subdirectory(source/core)
 add_subdirectory(source/dwarf_cli)
 
+add_dependencies(core_lib proto_gen)
+add_dependencies(network_lib proto_gen)
+
 add_executable(dwarf-hutia_exe
     source/main.cpp
 )
