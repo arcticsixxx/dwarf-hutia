@@ -15,7 +15,7 @@ Application::Application()
             return std::make_error_code(std::errc::invalid_argument);
         }
 
-        client_.Get(arg);
+        std::cout << client_.Get(arg).second << "\n";
         return {};
     });
 
@@ -28,6 +28,7 @@ Application::Application()
 
         std::string key, value;
         std::istringstream iss{arg};
+        iss >> key >> value;
 
         client_.Set(key, value);
         return {};
