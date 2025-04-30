@@ -12,4 +12,6 @@ target_compile_features(dwarf_cli PRIVATE cxx_std_20)
 
 target_link_libraries(dwarf_cli PRIVATE
     core_lib
+    network_lib
+    dwarf-hutia_lib
 )
