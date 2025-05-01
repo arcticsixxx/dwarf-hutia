@@ -5,7 +5,7 @@ add_custom_target(
     COMMAND "${CMAKE_COMMAND}"
     -D "SPELL_COMMAND=${SPELL_COMMAND}"
     -P "${PROJECT_SOURCE_DIR}/cmake/spell.cmake"
-    WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
+    WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/source"
     COMMENT "Checking spelling"
     VERBATIM
 )
@@ -16,7 +16,7 @@ add_custom_target(
     -D "SPELL_COMMAND=${SPELL_COMMAND}"
     -D FIX=YES
     -P "${PROJECT_SOURCE_DIR}/cmake/spell.cmake"
-    WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
+    WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/source"
     COMMENT "Fixing spelling errors"
     VERBATIM
 )
