@@ -1,3 +1,3 @@
 [submodule "third_party/njson"]
 	path = third_party/njson
-	url = git@github.com:nlohmann/json.git
+	url = https://github.com/nlohmann/json.git
