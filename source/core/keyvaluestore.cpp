@@ -1,7 +1,9 @@
-#include "keyvaluestore.h"
-
+#include <iostream>
 #include <mutex>
+#include <ostream>
 #include <shared_mutex>
+
+#include "keyvaluestore.h"
 
 namespace core
 {
@@ -29,15 +31,14 @@ std::optional<std::string> KeyValueStore::Get(const std::string &key)
 
 bool KeyValueStore::Delete(const std::string &key)
 {
-    std::lock_guard lock{mutex_};
+  std::lock_guard lock {mutex_};
 
-    if (! store_.contains(key) )
-    {
-        return false;
-    }
+  if (!store_.contains(key)) {
+    return false;
+  }
 
-    store_.erase(key);
-    return true;
+  store_.erase(key);
+  return true;
 }
 
 std::unordered_map<std::string, std::string> KeyValueStore::snapshot()

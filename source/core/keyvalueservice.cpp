@@ -36,9 +36,9 @@ grpc::Status KeyValueService::Delete([[maybe_unused]] grpc::ServerContext *conte
                                      const kvstore::DeleteRequest *request,
                                      kvstore::DeleteResponse *response)
 {
-    response->set_success(storage_->Delete(request->key()));
+  response->set_success(storage_->Delete(request->key()));
 
-    return grpc::Status::OK;
+  return grpc::Status::OK;
 }
 
 } // namespace core::network

@@ -33,6 +33,20 @@ Application::Application()
         client_.Set(key, value);
         return {};
     });
+
+    cli_.addHandler(
+        "DELETE",
+        [this](const std::string& arg) -> std::error_code
+        {
+          if (arg.empty()) {
+            std::cerr << "Error: Command string is empty!\n";
+            return std::make_error_code(std::errc::invalid_argument);
+          }
+
+          client_.Delete(arg);
+
+          return {};
+        });
 }
 
 void Application::run()
