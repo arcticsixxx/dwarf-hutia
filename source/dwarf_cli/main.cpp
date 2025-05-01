@@ -2,9 +2,9 @@
 
 auto main() -> int
 {
-    dwarf_cli::Application app;
+  dwarf_cli::Application app;
 
-    app.run();
+  app.run();
 
-    return 0;
+  return 0;
 }

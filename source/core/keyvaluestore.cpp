@@ -13,23 +13,22 @@ KeyValueStore::~KeyValueStore() {}
 
 void KeyValueStore::Set(const std::string& key, const std::string& value)
 {
-    std::shared_lock lock{mutex_};
-    store_[key] = value;
+  std::shared_lock lock {mutex_};
+  store_[key] = value;
 }
 
-std::optional<std::string> KeyValueStore::Get(const std::string &key)
+std::optional<std::string> KeyValueStore::Get(const std::string& key)
 {
-    std::lock_guard lock{mutex_};
+  std::lock_guard lock {mutex_};
 
-    if (! store_.contains(key))
-    {
-        return {};
-    }
+  if (!store_.contains(key)) {
+    return {};
+  }
 
-    return { store_[key] };
+  return {store_[key]};
 }
 
-bool KeyValueStore::Delete(const std::string &key)
+bool KeyValueStore::Delete(const std::string& key)
 {
   std::lock_guard lock {mutex_};
 
@@ -47,4 +46,4 @@ std::unordered_map<std::string, std::string> KeyValueStore::snapshot()
 
   return store_;
 }
-}
+}  // namespace core
