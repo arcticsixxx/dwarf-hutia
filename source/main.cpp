@@ -1,7 +1,7 @@
-#include <core/network/keyvalueservice.h>
-#include <core/network/server.h>
 #include <grpcpp/grpcpp.h>
+#include <keyvalueservice.h>
 #include <keyvaluestore.h>
+#include <server.h>
 
 auto main() -> int
 {

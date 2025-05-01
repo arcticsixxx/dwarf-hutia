@@ -1,10 +1,11 @@
 #pragma once
 
-#include "kvstore.grpc.pb.h"
-#include <grpcpp/grpcpp.h>
-
 #include <memory>
 #include <string>
+
+#include <grpcpp/grpcpp.h>
+
+#include "kvstore.grpc.pb.h"
 
 namespace core::network {
 

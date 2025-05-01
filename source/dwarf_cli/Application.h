@@ -1,7 +1,7 @@
 #pragma once
 
-#include "core/cli.h"
-#include "core/network/keyvalueclient.h"
+#include "cli.h"
+#include "keyvalueclient.h"
 
 namespace dwarf_cli
 {

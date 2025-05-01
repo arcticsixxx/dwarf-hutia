@@ -1,7 +1,8 @@
 #pragma once
 
-#include "kvstore.grpc.pb.h"
 #include <grpcpp/grpcpp.h>
+
+#include "kvstore.grpc.pb.h"
 
 namespace core {
 class IStorage;

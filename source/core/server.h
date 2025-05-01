@@ -1,8 +1,9 @@
 #pragma once
 
-#include "core/istorage.h"
-#include "keyvalueservice.h"
 #include <string>
+
+#include "istorage.h"
+#include "keyvalueservice.h"
 
 namespace core::network {
 // blocking for now

@@ -1,6 +1,6 @@
 #include "keyvalueservice.h"
 
-#include "core/istorage.h"
+#include "istorage.h"
 
 namespace core::network {
 
