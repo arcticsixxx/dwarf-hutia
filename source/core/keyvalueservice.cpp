@@ -1,6 +1,7 @@
 #include "keyvalueservice.h"
 
 #include "istorage.h"
+#include "utils/variant.h"
 
 namespace core::network
 {
@@ -14,9 +15,31 @@ grpc::Status KeyValueService::Set([[maybe_unused]] grpc::ServerContext* context,
                                   const kvstore::SetRequest* request,
                                   kvstore::SetResponse* response)
 {
-  storage_->Set(request->key(), request->value());
+  Value value;
+  switch (request->value_case()) {
+    case kvstore::SetRequest::kS:
+      value = request->s();
+      break;
+    case kvstore::SetRequest::kI:
+      value = std::to_string(request->i());
+      break;
+    case kvstore::SetRequest::kF:
+      value = std::to_string(request->f());
+      break;
+    case kvstore::SetRequest::kB:
+      value = request->b() ? "true" : "false";
+      break;
+    case kvstore::SetRequest::VALUE_NOT_SET:
+    default:
+      value = "";
+      break;
+  }
+
+  storage_->Set(request->key(), value);
+
   // guess its not always true
   response->set_success(true);
+
   return grpc::Status::OK;
 }
 
@@ -25,23 +48,17 @@ grpc::Status KeyValueService::Get([[maybe_unused]] grpc::ServerContext* context,
                                   kvstore::GetResponse* response)
 {
   auto value = storage_->Get(request->key());
-  // response->set_found(value.has_value());
+
   if (!value) {
     return {grpc::StatusCode::NOT_FOUND, "Value by received key not found"};
   }
 
-  std::visit([&](const auto& v) {
-    using T = std::decay_t<decltype(v)>;
-    if constexpr (std::is_same_v<T, std::string>) {
-      response->set_s(v);
-    } else if constexpr (std::is_same_v<T, int>) {
-      response->set_i(v);
-    } else if constexpr (std::is_same_v<T, float>) {
-      response->set_f(v);
-    } else if constexpr (std::is_same_v<T, bool>) {
-      response->set_b(v);
-    }
-  }, value.value());
+  std::visit(utils::overloaded {[&response](const std::string& str)
+                                { response->set_s(str); },
+                                [&response](int i) { response->set_i(i); },
+                                [&response](float f) { response->set_f(f); },
+                                [&response](bool b) { response->set_b(b); }},
+             value.value());
 
   return grpc::Status::OK;
 }

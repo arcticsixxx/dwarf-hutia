@@ -10,7 +10,13 @@ service KeyValueService {
 
 message SetRequest {
   string key = 1;
-  string value = 2;
+
+  oneof value {
+    string s = 2;
+    int32 i = 3;
+    float f = 4;
+    bool b = 5;
+  }
 }
 
 message SetResponse {

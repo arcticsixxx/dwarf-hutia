@@ -11,6 +11,9 @@ add_library(
     keyvalueclient.h keyvalueclient.cpp
     keyvaluestore.h keyvaluestore.cpp
     persistancemanager.h persistancemanager.cpp
+
+    utils/variant.h
+    utils/protohelpers.h
 )
 
 target_link_libraries(core_lib PRIVATE

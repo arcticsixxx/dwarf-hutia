@@ -1,6 +1,7 @@
 #include "keyvalueclient.h"
 
 #include <grpcpp/grpcpp.h>
+#include <utils/variant.h>
 
 namespace core::network
 {
@@ -10,11 +11,19 @@ KeyValueClient::KeyValueClient(std::shared_ptr<grpc::Channel> channel)
 {
 }
 
-bool KeyValueClient::Set(const std::string& key, const std::string& value)
+bool KeyValueClient::Set(const std::string& key, Value value)
 {
   kvstore::SetRequest request;
   request.set_key(key);
-  request.set_value(value);
+
+  std::visit(
+      utils::overloaded {
+          [&request](const std::string& str) { request.set_s(str); },
+          [&request](int i) { request.set_i(i); },
+          [&request](float f) { request.set_f(f); },
+          [&request](bool b) { request.set_b(b); },
+      },
+      value);
 
   kvstore::SetResponse response;
   grpc::ClientContext context;

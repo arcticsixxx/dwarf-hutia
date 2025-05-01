@@ -5,6 +5,7 @@
 
 #include <grpcpp/grpcpp.h>
 
+#include "istorage.h"
 #include "kvstore.grpc.pb.h"
 
 namespace core::network {
@@ -19,7 +20,7 @@ public:
     KeyValueClient(std::shared_ptr<grpc::Channel> channel);
 
     // TODO should handle grpc fails and internal kv core fails
-    bool Set(const std::string &key, const std::string &value);
+    bool Set(const std::string& key, Value value);
     std::pair<bool, std::string> Get(const std::string &key);
     bool Delete(const std::string &key);
 
