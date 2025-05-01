@@ -36,11 +36,12 @@ core::Value jsonToValue(const nlohmann::json& j)
 namespace core
 {
 
-PersistanceManager::PersistanceManager(std::shared_ptr<IStorage> storage,
+PersistanceManager::PersistanceManager(IStorage* const storage,
                                        const std::string& fileName)
     : storage_ {storage}
     , fileName_ {fileName}
 {
+  assert(storage);
 }
 
 PersistanceManager::~PersistanceManager() {}

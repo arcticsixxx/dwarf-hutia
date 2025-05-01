@@ -17,16 +17,16 @@ void KeyValueStore::Set(const std::string& key, Value value)
   store_[key] = std::move(value);
 }
 
-std::optional<Value> KeyValueStore::Get(const std::string &key) const
+std::optional<Value> KeyValueStore::Get(const std::string& key) const
 {
-    std::lock_guard lock {mutex_};
+  std::lock_guard lock {mutex_};
 
-    auto it = store_.find(key);
-    if (it == store_.end()) {
-      return std::nullopt;
-    }
+  auto it = store_.find(key);
+  if (it == store_.end()) {
+    return std::nullopt;
+  }
 
-    return {it->second};
+  return {it->second};
 }
 
 bool KeyValueStore::Delete(const std::string& key)

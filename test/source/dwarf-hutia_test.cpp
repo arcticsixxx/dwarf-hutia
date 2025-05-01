@@ -4,8 +4,8 @@
 
 int main()
 {
-  auto storage = std::make_shared<core::KeyValueStore>();
-  core::PersistanceManager manager(storage, "testdump.json");
+  auto storage = std::make_unique<core::KeyValueStore>();
+  core::PersistanceManager manager(storage.get(), "testdump.json");
   storage->Set("gol", "lol");
   manager.save();
   storage->Delete("gol");

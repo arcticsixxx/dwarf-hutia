@@ -11,14 +11,14 @@ class IStorage;
 class PersistanceManager
 {
 public:
-  PersistanceManager(std::shared_ptr<IStorage> storage,
-                     const std::string& fileName);
+  explicit PersistanceManager(IStorage* const storage,
+                              const std::string& fileName);
   ~PersistanceManager();
   void save();
   void load();
 
 private:
-  std::shared_ptr<IStorage> storage_;
+  IStorage* const storage_;
   std::string fileName_;
 };
 

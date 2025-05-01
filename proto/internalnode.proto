@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+service InternalNodeService {
+    rpc ReplicateSet(ReplicateSetRequest) returns (ReplicateSetResponse);
+}
+
+message ReplicateSetRequest {
+    string key = 1;
+
+    oneof value {
+        string s = 2;
+        int32 i = 3;
+        float f = 4;
+        bool b = 5;
+    }
+};
+
+message ReplicateSetResponse {
+    bool success = 1;
+};

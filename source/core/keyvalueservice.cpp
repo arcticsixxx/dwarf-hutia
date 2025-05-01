@@ -6,8 +6,8 @@
 namespace core::network
 {
 
-KeyValueService::KeyValueService(std::shared_ptr<IStorage> storage)
-    : storage_(std::move(storage))
+KeyValueService::KeyValueService(IStorage* const storage)
+    : storage_(storage)
 {
 }
 

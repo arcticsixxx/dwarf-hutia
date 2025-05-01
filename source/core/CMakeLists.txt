@@ -14,6 +14,7 @@ add_library(
 
     utils/variant.h
     utils/protohelpers.h
+    node.h node.cpp
 )
 
 target_link_libraries(core_lib PRIVATE
