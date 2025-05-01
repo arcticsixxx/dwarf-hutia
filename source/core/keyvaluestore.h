@@ -9,17 +9,16 @@ namespace core {
 
 class KeyValueStore : public IStorage
 {
-public:
-  // IStorage interface
+public:  
   KeyValueStore();
   ~KeyValueStore();
-  void Set(const std::string& key, const std::string& value) override;
-  std::optional<std::string> Get(const std::string& key) override;
-  bool Delete(const std::string& key) override;
-  std::unordered_map<std::string, std::string> snapshot() override;
+  void Set(const std::string& key, Value value);
+  std::optional<Value> Get(const std::string& key) const;
+  bool Delete(const std::string& key);
+  std::unordered_map<std::string, Value> snapshot();
 
 private:
-  std::unordered_map<std::string, std::string> store_;
-  std::shared_mutex mutex_;
+  std::unordered_map<std::string, Value> store_;
+  mutable std::shared_mutex mutex_;
 };
 } // namespace core

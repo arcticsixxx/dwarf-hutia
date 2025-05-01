@@ -21,10 +21,10 @@ PersistanceManager::~PersistanceManager() {}
 
 void PersistanceManager::save()
 {
-  nlohmann::json json(storage_->snapshot());
+  // nlohmann::json json(storage_->snapshot());
 
-  std::ofstream file(fileName_);
-  file << json.dump();
+  // std::ofstream file(fileName_);
+  // file << json.dump();
 }
 
 void PersistanceManager::load()
@@ -38,9 +38,9 @@ void PersistanceManager::load()
 
   file >> json;
 
-  for (auto& [key, value] : json.items()) {
-    storage_->Set(key, value);
-  }
+  // for (auto& [key, value] : json.items()) {
+  //   storage_->Set(key, value);
+  // }
 }
 
 }  // namespace core

@@ -11,21 +11,22 @@ KeyValueStore::KeyValueStore() {}
 
 KeyValueStore::~KeyValueStore() {}
 
-void KeyValueStore::Set(const std::string& key, const std::string& value)
+void KeyValueStore::Set(const std::string& key, Value value)
 {
   std::shared_lock lock {mutex_};
-  store_[key] = value;
+  store_[key] = std::move(value);
 }
 
-std::optional<std::string> KeyValueStore::Get(const std::string& key)
+std::optional<Value> KeyValueStore::Get(const std::string &key) const
 {
-  std::lock_guard lock {mutex_};
+    std::lock_guard lock {mutex_};
 
-  if (!store_.contains(key)) {
-    return {};
-  }
+    auto it = store_.find(key);
+    if (it == store_.end()) {
+      return std::nullopt;
+    }
 
-  return {store_[key]};
+    return {it->second};
 }
 
 bool KeyValueStore::Delete(const std::string& key)
@@ -40,7 +41,7 @@ bool KeyValueStore::Delete(const std::string& key)
   return true;
 }
 
-std::unordered_map<std::string, std::string> KeyValueStore::snapshot()
+std::unordered_map<std::string, Value> KeyValueStore::snapshot()
 {
   std::lock_guard lock {mutex_};
 

@@ -30,7 +30,19 @@ grpc::Status KeyValueService::Get([[maybe_unused]] grpc::ServerContext* context,
     return {grpc::StatusCode::NOT_FOUND, "Value by received key not found"};
   }
 
-  response->set_value(value.value());
+  std::visit([&](const auto& v) {
+    using T = std::decay_t<decltype(v)>;
+    if constexpr (std::is_same_v<T, std::string>) {
+      response->set_s(v);
+    } else if constexpr (std::is_same_v<T, int>) {
+      response->set_i(v);
+    } else if constexpr (std::is_same_v<T, float>) {
+      response->set_f(v);
+    } else if constexpr (std::is_same_v<T, bool>) {
+      response->set_b(v);
+    }
+  }, value.value());
+
   return grpc::Status::OK;
 }
 

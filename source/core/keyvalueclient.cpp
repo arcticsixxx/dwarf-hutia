@@ -5,8 +5,6 @@
 namespace core::network
 {
 
-// auto channel = grpc::CreateChannel("localhost:50051",
-// grpc::InsecureChannelCredentials()); ChannelRegistry
 KeyValueClient::KeyValueClient(std::shared_ptr<grpc::Channel> channel)
     : stub_(kvstore::KeyValueService::NewStub(channel))
 {
@@ -46,7 +44,27 @@ std::pair<bool, std::string> KeyValueClient::Get(const std::string& key)
     return {false, ""};
   }
 
-  return {response.found(), response.value()};
+  std::string value;
+  switch (response.value_case()) {
+    case kvstore::GetResponse::kS:
+      value = response.s();
+      break;
+    case kvstore::GetResponse::kI:
+      value = std::to_string(response.i());
+      break;
+    case kvstore::GetResponse::kF:
+      value = std::to_string(response.f());
+      break;
+    case kvstore::GetResponse::kB:
+      value = response.b() ? "true" : "false";
+      break;
+    case kvstore::GetResponse::VALUE_NOT_SET:
+    default:
+      value = "";
+      break;
+  }
+
+  return {true, value};
 }
 
 bool KeyValueClient::Delete(const std::string& key)

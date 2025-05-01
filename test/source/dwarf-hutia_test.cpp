@@ -11,7 +11,8 @@ int main()
   storage->Delete("gol");
   manager.load();
 
-  assert(storage->Get("gol") == "lol");
+  auto val = storage->Get("gol");
+  assert(val && std::get<std::string>(*val) == "lol");
 
   return 0;
 }

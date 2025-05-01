@@ -6,14 +6,16 @@
 
 namespace core {
 
+using Value = std::variant<std::string, int, float, bool>;
+
 class IStorage
 {
 public:
-  virtual ~IStorage() {};
-  virtual void Set(const std::string& key, const std::string& value) = 0;
-  virtual std::optional<std::string> Get(const std::string& key) = 0;
+  virtual ~IStorage() = default;
+  virtual void Set(const std::string& key, Value value) = 0;
+  virtual std::optional<Value> Get(const std::string& key) const = 0;
   virtual bool Delete(const std::string& key) = 0;
-  virtual std::unordered_map<std::string, std::string> snapshot() = 0;
+  virtual std::unordered_map<std::string, Value> snapshot() = 0;
 };
 
 } // namespace core
