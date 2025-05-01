@@ -10,10 +10,12 @@ add_library(
     keyvalueservice.h keyvalueservice.cpp
     keyvalueclient.h keyvalueclient.cpp
     keyvaluestore.h keyvaluestore.cpp
+    persistancemanager.h persistancemanager.cpp
 )
 
 target_link_libraries(core_lib PRIVATE
     kvstore_grpc_lib
+    nlohmann_json::nlohmann_json
 )
 
 target_include_directories(

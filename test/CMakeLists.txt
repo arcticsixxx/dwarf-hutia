@@ -6,8 +6,13 @@ project(dwarf-hutiaTests LANGUAGES CXX)
 
 # ---- Tests ----
 
-add_executable(dwarf-hutia_test source/dwarf-hutia_test.cpp)
-# target_link_libraries(dwarf-hutia_test PRIVATE dwarf-hutia_lib)
+add_executable(dwarf-hutia_test
+    source/dwarf-hutia_test.cpp
+)
+
+target_link_libraries(dwarf-hutia_test PRIVATE core_lib)
+target_link_libraries(dwarf-hutia_test PRIVATE kvstore_grpc_lib)
+
 target_compile_features(dwarf-hutia_test PRIVATE cxx_std_20)
 
 add_test(NAME dwarf-hutia_test COMMAND dwarf-hutia_test)

@@ -5,7 +5,11 @@
 
 namespace core
 {
-void KeyValueStore::Set(const std::string &key, const std::string &value)
+KeyValueStore::KeyValueStore() {}
+
+KeyValueStore::~KeyValueStore() {}
+
+void KeyValueStore::Set(const std::string& key, const std::string& value)
 {
     std::shared_lock lock{mutex_};
     store_[key] = value;
@@ -34,5 +38,12 @@ bool KeyValueStore::Delete(const std::string &key)
 
     store_.erase(key);
     return true;
+}
+
+std::unordered_map<std::string, std::string> KeyValueStore::snapshot()
+{
+  std::lock_guard lock {mutex_};
+
+  return store_;
 }
 }

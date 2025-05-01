@@ -1,7 +1,17 @@
-// jinclude "lib.hpp"
+#include <assert.h>
+#include <keyvaluestore.h>
+#include <persistancemanager.h>
 
-auto main() -> int {
-  // auto const lib = library{};
+int main()
+{
+  auto storage = std::make_shared<core::KeyValueStore>();
+  core::PersistanceManager manager(storage, "testdump.json");
+  storage->Set("gol", "lol");
+  manager.save();
+  storage->Delete("gol");
+  manager.load();
 
-  // return lib.name == "dwarf-hutia" ? 0 : 1;
+  assert(storage->Get("gol") == "lol");
+
+  return 0;
 }

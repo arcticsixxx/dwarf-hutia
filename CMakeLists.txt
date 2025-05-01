@@ -59,6 +59,11 @@ target_include_directories(
     ${PROTOBUF_INCLUDE_DIRS}
 )
 
+# ---- Third party libraries ----
+
+set(NLOHMANN_JSON_SYSTEM_INCLUDE "")
+add_subdirectory(third_party/njson)
+
 # ---- Declare library ----
 
 add_subdirectory(source/core)
