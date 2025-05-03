@@ -15,7 +15,7 @@ class Node
 {
 public:
   Node();
-  void run();
+  void run(const std::string& addr_uri);
 
   // set
   // get
@@ -24,7 +24,6 @@ private:
   std::unique_ptr<IStorage> storage_;
   // network::KeyValueService service_;
   PersistanceManager dump_;
-
   // nodeId
   // status eg heart beat
   // InternalNodeStub

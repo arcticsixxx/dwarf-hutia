@@ -14,7 +14,7 @@ Node::Node()
 {
 }
 
-void Node::run()
+void Node::run(const std::string& addr_uri)
 {
   bool isSaving {true};
   dump_.load();
@@ -28,7 +28,7 @@ void Node::run()
       });
   autosave_thread.detach();
 
-  network::RunServer("0.0.0.0:50051", storage_.get());
+  network::RunServer(addr_uri, storage_.get());
   isSaving = false;
 }
 
