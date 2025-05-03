@@ -13,6 +13,7 @@ project(
 include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
 include(cmake/grpc-gen.cmake)
+include(cmake/werror.cmake)
 
 # ---- GRPC ----
 

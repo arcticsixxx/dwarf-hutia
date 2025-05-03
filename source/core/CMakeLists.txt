@@ -17,6 +17,8 @@ add_library(
     node.h node.cpp
 )
 
+add_werror(core_lib)
+
 target_link_libraries(core_lib PRIVATE
     kvstore_grpc_lib
     nlohmann_json::nlohmann_json
