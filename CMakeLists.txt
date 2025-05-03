@@ -54,7 +54,7 @@ target_link_libraries(kvstore_grpc_lib PRIVATE
 # -Or when it's being used by another target in the same build system (same CMake project)
 target_include_directories(
     kvstore_grpc_lib ${warning_guard}
-    PUBLIC
+    SYSTEM PUBLIC
    "\$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/generated>"
     ${PROTOBUF_INCLUDE_DIRS}
 )
@@ -66,25 +66,10 @@ add_subdirectory(third_party/njson)
 
 # ---- Declare library ----
 
-add_subdirectory(source/core)
-add_subdirectory(source/dwarf_cli)
+add_subdirectory(source)
 
 # ---- Declare executable ----
 
-add_executable(dwarf-hutia_exe
-    source/main.cpp
-)
-
-add_executable(dwarf-hutia::exe ALIAS dwarf-hutia_exe)
-
-set_property(TARGET dwarf-hutia_exe PROPERTY OUTPUT_NAME dwarf-hutia)
-
-target_compile_features(dwarf-hutia_exe PRIVATE cxx_std_20)
-
-target_link_libraries(dwarf-hutia_exe PRIVATE
-    core_lib
-    kvstore_grpc_lib
-)
 
 # ---- Install rules ----
 

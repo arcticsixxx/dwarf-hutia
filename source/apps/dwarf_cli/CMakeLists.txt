@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.14)
 
 add_executable(dwarf_cli
     main.cpp
-    Application.h
-    Application.cpp
+    application.h
+    application.cpp
 )
 
 set_property(TARGET dwarf_cli PROPERTY OUTPUT_NAME dwarf_cli)
