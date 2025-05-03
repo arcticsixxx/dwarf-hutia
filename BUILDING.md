@@ -3,7 +3,8 @@
 ## Current build essentials 
 
 ```sh
-brew install autoconf automake libtool pkg-config zlib grpc protobuf
+brew install autoconf automake libtool pkg-config zlib grpc protobuf boost
+export Boost_INCLUDE_DIR=/opt/homebrew/include/boost
 ```
 
 ## Build
