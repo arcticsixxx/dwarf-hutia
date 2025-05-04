@@ -17,10 +17,7 @@ CLI::CLI()
 
 CLI::~CLI()
 {
-  {
-    std::unique_lock<std::mutex> lock {mutex_};
-    is_running_ = false;
-  }
+  is_running_ = false;
 
   cv_.notify_one();
 }
