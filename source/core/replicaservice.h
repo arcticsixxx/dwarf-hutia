@@ -22,6 +22,14 @@ public:
                    const kvstore::GetRequest* request,
                    kvstore::GetResponse* response) override;
 
+  grpc::Status Set(grpc::ServerContext* context,
+                   const kvstore::SetRequest* request,
+                   kvstore::SetResponse* response) override;
+
+  grpc::Status Delete(grpc::ServerContext* context,
+                      const kvstore::DeleteRequest* request,
+                      kvstore::DeleteResponse* response) override;
+
 private:
   void syncWithMaster();
 

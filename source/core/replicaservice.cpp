@@ -45,6 +45,20 @@ grpc::Status ReplicaService::Get([[maybe_unused]] grpc::ServerContext *context,
   return grpc::Status::OK;
 }
 
+grpc::Status ReplicaService::Set([[maybe_unused]] grpc::ServerContext *context,
+                                 [[maybe_unused]] const kvstore::SetRequest *request,
+                                 [[maybe_unused]] kvstore::SetResponse *response)
+{
+  return { grpc::StatusCode::UNIMPLEMENTED, "SET method not available for replica" };
+}
+
+grpc::Status ReplicaService::Delete([[maybe_unused]] grpc::ServerContext *context,
+                                    [[maybe_unused]] const kvstore::DeleteRequest *request,
+                                    [[maybe_unused]] kvstore::DeleteResponse *response)
+{
+  return { grpc::StatusCode::UNIMPLEMENTED, "DELETE method not available for replica" };
+}
+
 void ReplicaService::syncWithMaster()
 {
   kvstore::SyncRequest req;

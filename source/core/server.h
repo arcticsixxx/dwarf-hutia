@@ -34,7 +34,6 @@ inline static void RunReplicaServer(const std::string& server_address,
 
   std::unique_ptr<grpc::Server> server(builder.BuildAndStart());
   server->Wait();
-
 }
 
 } // namespace core::network

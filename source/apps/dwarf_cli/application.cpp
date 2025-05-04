@@ -5,8 +5,8 @@
 namespace dwarf_cli
 {
 
-Application::Application()
-    : client_ {grpc::CreateChannel("localhost:50051",
+Application::Application(const std::string& server_uri)
+    : client_ {grpc::CreateChannel(server_uri,
                                    grpc::InsecureChannelCredentials())}
 {
   cli_.addHandler("GET",

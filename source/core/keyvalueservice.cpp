@@ -38,6 +38,12 @@ grpc::Status KeyValueService::Set([[maybe_unused]] grpc::ServerContext* context,
 
   storage_->Set(request->key(), value);
 
+  if (streams_.empty())
+  {
+    response->set_success(true);
+    return grpc::Status::OK;
+  }
+
   kvstore::SyncEvent event;
   event.set_op(kvstore::SET);
 
@@ -125,7 +131,6 @@ grpc::Status KeyValueService::SyncStream(grpc::ServerContext *context,
 
 void KeyValueService::writeToStreams(const kvstore::SyncEvent &event)
 {
-  std::lock_guard<std::mutex> lock{streamsMutex_};
   for (auto* writer : streams_) {
     writer->Write(event);
   }

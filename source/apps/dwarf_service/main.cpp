@@ -13,14 +13,15 @@ auto main() -> int
     return 0;
   }
 
+  core::Node node;
   auto replica = parser.getReplica();
   if (replica)
   {
-    std::cerr << "run replica for instance " << replica.value();
+    std::cerr << "run replica for instance " << replica.value() << "\n";
+    node.run(uri.value(), replica.value());
     return 0;
   }
 
-  core::Node node;
   node.run(uri.value());
 
   return 0;
