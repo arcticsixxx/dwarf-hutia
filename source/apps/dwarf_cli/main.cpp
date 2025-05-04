@@ -3,8 +3,7 @@
 auto main(int argc, char** argv) -> int
 {
   std::string server_uri = "";
-  if (argc == 2)
-  {
+  if (argc == 2) {
     server_uri = argv[1];
   }
 
