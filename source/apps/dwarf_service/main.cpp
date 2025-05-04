@@ -13,6 +13,13 @@ auto main() -> int
     return 0;
   }
 
+  auto replica = parser.getReplica();
+  if (replica)
+  {
+    std::cerr << "run replica for instance " << replica.value();
+    return 0;
+  }
+
   core::Node node;
   node.run(uri.value());
 

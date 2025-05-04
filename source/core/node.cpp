@@ -14,7 +14,7 @@ Node::Node()
 {
 }
 
-void Node::run(const std::string& addr_uri)
+void Node::run(const std::string& addr_uri, const std::string &master_uri)
 {
   bool isSaving {true};
   dump_.load();
@@ -27,6 +27,13 @@ void Node::run(const std::string& addr_uri)
         }
       });
   autosave_thread.detach();
+
+  if (!master_uri.empty())
+  {
+    network::RunReplicaServer(addr_uri, master_uri, storage_.get());
+    isSaving = false;
+    return;
+  }
 
   network::RunServer(addr_uri, storage_.get());
   isSaving = false;

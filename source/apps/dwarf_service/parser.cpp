@@ -18,7 +18,8 @@ ConfigParser::ConfigParser()
     po::options_description desc{"Allowed options"};
     desc.add_options()
         ("port", po::value<uint32_t>()->required(), "listening port")
-        ("bind", po::value<std::string>()->default_value("127.0.0.1"), "bind host");
+        ("bind", po::value<std::string>()->default_value("127.0.0.1"), "bind host")
+        ("replicaof", po::value<std::string>(), "uri of main instance for replica");
 
     std::ifstream cfg{cfgPath};
     if (cfg)
@@ -49,6 +50,16 @@ std::optional<std::string> ConfigParser::getUri() const
   }
 
   return { vm_["bind"].as<std::string>() + ":" + std::to_string(vm_["port"].as<uint32_t>()) };
+}
+
+std::optional<std::string> ConfigParser::getReplica() const
+{
+  if (!vm_.count("replicaof"))
+  {
+    return {};
+  }
+
+  return { vm_["replicaof"].as<std::string>() };
 }
 
 }
