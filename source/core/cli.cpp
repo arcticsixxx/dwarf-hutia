@@ -98,7 +98,6 @@ void CLI::proccessCmds(const std::vector<std::string>& cmds)
     bool commandMatched = false;
 
     for (auto&& kw : keywords_) {
-      ;
       if (cmd.starts_with(kw)) {
         commandMatched = true;
         break;
