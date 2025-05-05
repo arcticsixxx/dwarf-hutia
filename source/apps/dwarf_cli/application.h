@@ -9,7 +9,7 @@ namespace dwarf_cli
 class Application
 {
 public:
-    explicit Application();
+    explicit Application(const std::string& server_uri = "localhost:50051");
 
     void run();
 

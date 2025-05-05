@@ -1,3 +1,5 @@
+#include <thread>
+
 #include "keyvalueservice.h"
 
 #include "istorage.h"
@@ -21,13 +23,13 @@ grpc::Status KeyValueService::Set([[maybe_unused]] grpc::ServerContext* context,
       value = request->s();
       break;
     case kvstore::SetRequest::kI:
-      value = std::to_string(request->i());
+      value = request->i();
       break;
     case kvstore::SetRequest::kF:
-      value = std::to_string(request->f());
+      value = request->f();
       break;
     case kvstore::SetRequest::kB:
-      value = request->b() ? "true" : "false";
+      value = request->b();
       break;
     case kvstore::SetRequest::VALUE_NOT_SET:
     default:
@@ -36,6 +38,25 @@ grpc::Status KeyValueService::Set([[maybe_unused]] grpc::ServerContext* context,
   }
 
   storage_->Set(request->key(), value);
+
+  if (streams_.empty()) {
+    response->set_success(true);
+    return grpc::Status::OK;
+  }
+
+  kvstore::SyncEvent event;
+  event.set_op(kvstore::SET);
+
+  kvstore::KVPair* entry = event.mutable_pair();
+  entry->set_key(request->key());
+  std::visit(utils::overloaded {[&entry](const std::string& str)
+                                { entry->set_s(str); },
+                                [&entry](int i) { entry->set_i(i); },
+                                [&entry](float f) { entry->set_f(f); },
+                                [&entry](bool b) { entry->set_b(b); }},
+             value);
+
+  writeToStreams(event);
 
   // guess its not always true
   response->set_success(true);
@@ -71,6 +92,49 @@ grpc::Status KeyValueService::Delete(
   response->set_success(storage_->Delete(request->key()));
 
   return grpc::Status::OK;
+}
+
+grpc::Status KeyValueService::InitialSync(
+    [[maybe_unused]] grpc::ServerContext* context,
+    [[maybe_unused]] const kvstore::SyncRequest* request,
+    kvstore::FullSyncResponse* response)
+{
+  std::lock_guard<std::mutex> lock {streamsMutex_};
+  for (const auto& [key, value] : storage_->snapshot()) {
+    kvstore::KVPair* entry = response->add_entries();
+    entry->set_key(key);
+
+    std::visit(utils::overloaded {[&entry](const std::string& str)
+                                  { entry->set_s(str); },
+                                  [&entry](int i) { entry->set_i(i); },
+                                  [&entry](float f) { entry->set_f(f); },
+                                  [&entry](bool b) { entry->set_b(b); }},
+               value);
+  }
+
+  return grpc::Status::OK;
+}
+
+grpc::Status KeyValueService::SyncStream(
+    grpc::ServerContext* context,
+    [[maybe_unused]] const kvstore::SyncRequest* request,
+    grpc::ServerWriter<kvstore::SyncEvent>* writer)
+{
+  std::lock_guard<std::mutex> lock {streamsMutex_};
+  streams_.push_back(writer);
+
+  while (!context->IsCancelled()) {
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+  }
+
+  return grpc::Status::OK;
+}
+
+void KeyValueService::writeToStreams(const kvstore::SyncEvent& event)
+{
+  for (auto* writer : streams_) {
+    writer->Write(event);
+  }
 }
 
 }  // namespace core::network

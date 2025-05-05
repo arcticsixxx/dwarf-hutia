@@ -15,6 +15,8 @@ public:
 
   std::optional<std::string> getUri() const;
 
+  std::optional<std::string> getReplica() const;
+
 private:
   po::variables_map vm_;
 };

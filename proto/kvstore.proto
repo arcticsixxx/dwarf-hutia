@@ -6,11 +6,42 @@ service KeyValueService {
   rpc Set(SetRequest) returns (SetResponse);
   rpc Get(GetRequest) returns (GetResponse);
   rpc Delete(DeleteRequest) returns (DeleteResponse);
+  rpc InitialSync(SyncRequest) returns (FullSyncResponse);
+  rpc SyncStream(SyncRequest) returns (stream SyncEvent);
+}
+
+service ReplicaService {
+  rpc Get(GetRequest) returns (GetResponse);
+}
+
+message SyncRequest {}
+
+message FullSyncResponse {
+  repeated KVPair entries = 1;
+}
+
+message KVPair {
+  string key = 1;
+  oneof value {
+    string s = 2;
+    int32 i = 3;
+    float f = 4;
+    bool b = 5;
+  }
+}
+
+enum OperationType {
+  SET = 0;
+  DELETE = 1;
+}
+
+message SyncEvent {
+  OperationType op = 1;
+  KVPair pair = 2;
 }
 
 message SetRequest {
   string key = 1;
-
   oneof value {
     string s = 2;
     int32 i = 3;
@@ -29,7 +60,6 @@ message GetRequest {
 
 message GetResponse {
   bool found = 1;
-
   oneof value {
     string s = 2;
     int32 i = 3;
