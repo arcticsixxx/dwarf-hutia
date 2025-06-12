@@ -15,6 +15,8 @@ add_library(
     utils/variant.h
     utils/protohelpers.h
     node.h node.cpp
+    replicaservice.h
+    replicaservice.cpp
 )
 
 target_link_libraries(core_lib PRIVATE

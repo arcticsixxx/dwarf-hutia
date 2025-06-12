@@ -26,8 +26,22 @@ public:
                       const kvstore::DeleteRequest* request,
                       kvstore::DeleteResponse* response) override;
 
+  grpc::Status InitialSync(grpc::ServerContext* context,
+                           const kvstore::SyncRequest* request,
+                           kvstore::FullSyncResponse* response) override;
+
+  grpc::Status SyncStream(grpc::ServerContext* context,
+                          const kvstore::SyncRequest* request,
+                          grpc::ServerWriter<kvstore::SyncEvent>* writer) override;
+
+private:
+  void writeToStreams(const kvstore::SyncEvent& event);
+
 private:
   IStorage* const storage_;
+
+  std::mutex streamsMutex_;
+  std::vector<grpc::ServerWriter<kvstore::SyncEvent>*> streams_;
 };
 
 } // namespace core::network

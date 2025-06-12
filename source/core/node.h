@@ -15,7 +15,7 @@ class Node
 {
 public:
   Node();
-  void run(const std::string& addr_uri);
+  void run(const std::string& addr_uri, const std::string& master_uri = "");
 
   // set
   // get

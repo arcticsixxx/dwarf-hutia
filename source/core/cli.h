@@ -25,7 +25,7 @@ private:
     void proccessCmds(const std::vector<std::string>& cmds);
 
 private:
-    bool is_running_;
+    std::atomic<bool> is_running_;
 
     std::queue<std::string> queue_;
     std::condition_variable cv_;
