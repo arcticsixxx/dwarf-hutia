@@ -2,12 +2,18 @@
 
 #include <queue>
 #include <map>
-#include <set>
+
+#include "commandwrapper.h"
+
 
 namespace core
 {
 
-using CmdHandler = std::function<std::error_code(const std::string&)>;
+namespace network
+{
+class KeyValueClient;
+}
+
 using Commands = std::tuple<std::string, std::string>;
 
 class CLI
@@ -16,8 +22,13 @@ public:
     explicit CLI();
     ~CLI();
 
+    template<typename CmdType>
+    void registerCommand(network::KeyValueClient& client)
+    {
+      handlers_[std::string{CmdType::name()}] = std::make_unique<CommandWrapper<CmdType>>(client);
+    }
+
     void addArg(const std::string& arg);
-    void addHandler(const std::string& cmd, CmdHandler&& handler);
 
 private:
     void parseInput();
@@ -31,8 +42,7 @@ private:
     std::condition_variable cv_;
     std::mutex mutex_;
 
-    std::map<std::string, CmdHandler> handlers_;
-    std::set<std::string> keywords_;
+    std::map<std::string, std::unique_ptr<ICommand>> handlers_;
 };
 
 }

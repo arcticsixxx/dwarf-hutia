@@ -32,13 +32,13 @@ void CLI::addArg(const std::string& arg)
   cv_.notify_one();
 }
 
-void CLI::addHandler(const std::string& cmd, CmdHandler&& handler)
-{
-  auto newCmd = std::string {slashKey + cmd};
+// void CLI::addHandler(const std::string& cmd, CmdHandler&& handler)
+// {
+//   auto newCmd = std::string {slashKey + cmd};
 
-  handlers_[newCmd] = std::move(handler);
-  keywords_.insert(newCmd);
-}
+//   handlers_[newCmd] = std::move(handler);
+//   keywords_.insert(newCmd);
+// }
 
 void CLI::parseInput()
 {
@@ -94,36 +94,29 @@ void CLI::proccessCmds(const std::vector<std::string>& cmds)
     return;
   }
 
-  for (auto&& cmd : cmds) {
-    bool commandMatched = false;
-
-    for (auto&& kw : keywords_) {
-      if (cmd.starts_with(kw)) {
-        commandMatched = true;
-        break;
-      }
-    }
-
-    if (!commandMatched) {
-      continue;
-    }
-
+  for (const auto& cmd : cmds) {
     size_t pos = cmd.find(' ');
-    std::string c, args;
+    std::string commandName;
+    std::string args;
 
     if (pos != std::string::npos) {
-      c = cmd.substr(0, pos);
+      commandName = cmd.substr(0, pos);
       args = cmd.substr(pos + 1);
     } else {
-      c = cmd;
+      commandName = cmd;
     }
 
-    auto it = handlers_.find(c);
+    auto it = handlers_.find(commandName);
     if (it == handlers_.end()) {
+      std::cerr << "Unknown command: " << commandName << "\n";
       continue;
     }
 
-    it->second(args);
+    std::error_code ec = it->second->execute(args);
+    if (ec) {
+      std::cerr << "Command error (" << commandName << "): " << ec.message() << "\n";
+    }
   }
 }
+
 }  // namespace core

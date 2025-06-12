@@ -11,12 +11,14 @@ add_library(
     keyvalueclient.h keyvalueclient.cpp
     keyvaluestore.h keyvaluestore.cpp
     persistancemanager.h persistancemanager.cpp
-
     utils/variant.h
     utils/protohelpers.h
     node.h node.cpp
     replicaservice.h
     replicaservice.cpp
+    icommand.h
+    commandwrapper.h
+    commands.h
 )
 
 target_link_libraries(core_lib PRIVATE
